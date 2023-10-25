@@ -1,0 +1,17 @@
+.project_container{
+    padding: 2em;
+}
+
+.title_container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+
+.title_container h1{
+    font-size: 2rem;
+}
+
+.title_container p{
+    font-size: 0.6rem;
+}

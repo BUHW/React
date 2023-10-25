@@ -1,7 +1,81 @@
 {
   "projects": [
     {
+      "name": "Projeto teste",
+      "budget": "5000",
+      "category": {
+        "id": "3",
+        "name": "Planejamento"
+      },
+      "cost": 0,
+      "services": [],
       "id": 1
+    },
+    {
+      "name": "Era a porra de uma letra",
+      "budget": "10000",
+      "category": {
+        "id": "5",
+        "name": "TI(Tecnologia dsa informação)"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 2
+    },
+    {
+      "name": "Cell não funciona, preciso testar no tablet",
+      "budget": "5555555",
+      "category": {
+        "id": "3",
+        "name": "Planejamento"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 3
+    },
+    {
+      "name": "teste mensagem",
+      "budget": "20000",
+      "category": {
+        "id": "0",
+        "name": "Industrial"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 4
+    },
+    {
+      "name": "vtjhc",
+      "budget": "444",
+      "category": {
+        "id": "1",
+        "name": "Desenvolvimento"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 5
+    },
+    {
+      "name": "Controle de RNC",
+      "budget": "80000",
+      "category": {
+        "id": "4",
+        "name": "Qualidade"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 6
+    },
+    {
+      "name": "teste55",
+      "budget": "55",
+      "category": {
+        "id": "5",
+        "name": "TI(Tecnologia da informação)"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 7
     }
   ],
   "categories": [
@@ -27,7 +101,11 @@
     },
     {
       "id": 5,
-      "name": "TI(Tecnologia dsa informação)"
+      "name": "TI(Tecnologia da informação)"
+    },
+    {
+      "id": 6,
+      "name": "Recursos Humanos"
     }
   ]
 }

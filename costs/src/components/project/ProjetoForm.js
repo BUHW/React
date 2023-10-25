@@ -26,7 +26,6 @@ function ProjetoForm({ handleSubmit, btnText, projectData }) {
     const submit = (e) => {
         e.preventDefault()
         handleSubmit(project)
-        //console.log(project)
     }
 
     function handleChange(e) {
@@ -38,7 +37,7 @@ function ProjetoForm({ handleSubmit, btnText, projectData }) {
             ...project, category: {
                 id: e.target.value,
                 name: e.target.options[e.target.selectedIndex].text,
-            }
+            },
         })
     }
 
