@@ -37,27 +37,40 @@
     margin-right: 5px;
 }
 
-.category_text span .infra{
+.category_text .infra{
     background-color: #a5e5c2;
 }
 
-.category_text span .desen{
+.category_text .desenvolvimento{
     background-color: #e4e3a5;
 }
 
-.category_text span .desig{
+.category_text .design{
     background-color: #c8a5e5;
 }
 
-.category_text span .plane{
+.category_text .industrial{
+    background-color: #8c00ff;
+}
+
+.category_text .qualidade{
+    background-color: #00fbff;
+}
+
+.category_text .planejamento{
     background-color: #e5a5a5;
 }
 
-.category_text span .tecno{
+.category_text .ti{
     background-color: #133bec;
 }
 
-.category_text span .rechu{
-    background-color: #8049c0;
+.category_text .rh{
+    background-color: #c049b6;
 }
+
+.category_text .corte{
+    background-color: #000000;
+}
+
 

@@ -76,6 +76,72 @@
       "cost": 0,
       "services": [],
       "id": 7
+    },
+    {
+      "name": "Jeanzinho",
+      "budget": "10000",
+      "category": {
+        "id": "0",
+        "name": "Industrial"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 8
+    },
+    {
+      "name": "RH cor",
+      "budget": "488881",
+      "category": {
+        "id": "6",
+        "name": "Recursos Humanos"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 9
+    },
+    {
+      "name": "ti",
+      "budget": "12",
+      "category": {
+        "id": "5",
+        "name": "TI"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 10
+    },
+    {
+      "name": "RH",
+      "budget": "615",
+      "category": {
+        "id": "6",
+        "name": "RH"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 11
+    },
+    {
+      "name": "Corte cor",
+      "budget": "58222",
+      "category": {
+        "id": "7",
+        "name": "corte"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 12
+    },
+    {
+      "budget": "-1000",
+      "name": "oi",
+      "category": {
+        "id": "4",
+        "name": "Qualidade"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 13
     }
   ],
   "categories": [
@@ -101,11 +167,15 @@
     },
     {
       "id": 5,
-      "name": "TI(Tecnologia da informação)"
+      "name": "TI"
     },
     {
       "id": 6,
-      "name": "Recursos Humanos"
+      "name": "RH"
+    },
+    {
+      "id": 7,
+      "name": "corte"
     }
   ]
 }
