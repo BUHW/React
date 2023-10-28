@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom"
 
 import Message from "../layout/Message"
 import Container from "../layout/Container"
+import Loading from "../layout/Loading"
 import LinkButton from '../layout/LinkButton'
 import ProjectCard from "../project/ProjectCard"
 
@@ -13,6 +14,7 @@ import styles from "./Projetos.module.css"
 function Projetos() {
 
     const[projects, setProjects] = useState([])
+    const[removeLoading, setRemoveLoading] = useState(false)
 
     const location = useLocation()
     let message = ''
@@ -22,7 +24,8 @@ function Projetos() {
 
     useEffect(() => {
 
-        fetch('http://localhost:5000/projects', {
+        setTimeout(() => {
+            fetch('http://localhost:5000/projects', {
             method: 'GET',
             headers: {
                 'Content-Type': 'aplication/json'
@@ -32,8 +35,10 @@ function Projetos() {
         .then((data) => {
             console.log(data)
             setProjects(data)
+            setRemoveLoading(true)
         })
         .catch((err)  => console.log(err))
+        }, 500)
 
     }, [])
 
@@ -55,6 +60,10 @@ function Projetos() {
                     key={projects.id}
                     />
                 ))}
+                {!removeLoading && <Loading/>}
+                {removeLoading && projects.length === 0 && (
+                    <p>Não ha projetos cadastrados</p>
+                )}
             </Container>
         </section>
     )
