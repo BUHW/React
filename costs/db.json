@@ -45,20 +45,26 @@
       "id": 4
     },
     {
-      "cost": 0,
-      "services": [],
-      "id": 5
-    },
-    {
-      "name": "oii",
-      "budget": "55",
+      "name": "testando ",
+      "budget": "1000",
       "category": {
-        "id": "3",
-        "name": "Planejamento"
+        "id": "4",
+        "name": "Qualidade"
       },
       "cost": 0,
       "services": [],
-      "id": 6
+      "id": 7
+    },
+    {
+      "name": "Funcionou eee",
+      "budget": "155",
+      "category": {
+        "id": "5",
+        "name": "TI"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 8
     }
   ],
   "categories": [
