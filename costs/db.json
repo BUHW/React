@@ -29,8 +29,27 @@
         "id": "0",
         "name": "Industrial"
       },
-      "cost": 0,
-      "services": [],
+      "cost": 2018,
+      "services": [
+        {
+          "name": "victor",
+          "cost": "12",
+          "description": "fonte",
+          "id": "ced5ac02-99af-411f-9127-a10957ed34e2"
+        },
+        {
+          "name": "Fala meu ",
+          "cost": "1000",
+          "description": "naaba",
+          "id": "0284bfe9-fcc2-4695-a3d8-dfa9c4cc005b"
+        },
+        {
+          "name": "Novo serviço",
+          "cost": "1006",
+          "description": "oi zó",
+          "id": "d8444d38-55dc-4333-b76b-efac38b04e4a"
+        }
+      ],
       "id": 3
     },
     {
