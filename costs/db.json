@@ -2,7 +2,7 @@
   "projects": [
     {
       "name": "Cadastro de RNC",
-      "budget": "25000",
+      "budget": "10000",
       "category": {
         "id": "5",
         "name": "TI"
@@ -24,25 +24,25 @@
     },
     {
       "name": "Estoque minimo",
-      "budget": "48888",
+      "budget": "5000",
       "category": {
-        "id": "7",
-        "name": "corte"
+        "id": "0",
+        "name": "Industrial"
       },
       "cost": 0,
       "services": [],
       "id": 3
     },
     {
-      "name": "testando ",
-      "budget": "1000",
+      "name": "toninho success",
+      "budget": "180000",
       "category": {
-        "id": "4",
-        "name": "Qualidade"
+        "id": "5",
+        "name": "TI"
       },
       "cost": 0,
       "services": [],
-      "id": 7
+      "id": 6
     }
   ],
   "categories": [
