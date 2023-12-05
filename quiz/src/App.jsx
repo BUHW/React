@@ -4,7 +4,7 @@ import './App.css'
 
 function App() {
   return (
-    <section className="app">
+    <section className="App">
       <h1>Quiz de programação</h1>
       <Welcome />
     </section>
