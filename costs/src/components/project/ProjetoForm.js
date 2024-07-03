@@ -1,35 +1,36 @@
 import { useState, useEffect } from 'react';
+import { HOST, PORT, HTTP, TOKEN } from '../../variables';
 
 import styles from "./ProjetoForm.module.css";
 import Input from "../form/input";
 import Select from "../form/Select";
 import SubmitButton from "../form/SubmitButton";
+import axios from 'axios';
 
 function ProjetoForm({ handleSubmit, btnText, projectData }) {
-    const [categories, setCatagories] = useState([]);
-    const [project, setProject] = useState(projectData || {})
+    const [categories, setCategories] = useState([]);
+    const [project, setProject] = useState(projectData || {});
 
     useEffect(() => {
-        fetch("http://localhost:5000/categories", {
-            method: 'GET',
+        axios.get(`${HTTP}://${HOST}:${PORT}/categories`, {
             headers: {
-                'Content-Type': 'application/json',
-            },
+                'Authorization': `Bearer ${TOKEN}`,
+                'Content-Type': 'application/json' 
+            }
         })
-            .then((resp) => resp.json())
-            .then((data) => {
-                setCatagories(data)
+            .then((response) => {
+                setCategories(response.data);
             })
             .catch((err) => console.log(err));
-    }, [])
+    }, []);
 
     const submit = (e) => {
-        e.preventDefault()
-        handleSubmit(project)
-    }
+        e.preventDefault();
+        handleSubmit(project);
+    };
 
     function handleChange(e) {
-        setProject({ ...project, [e.target.name]: e.target.value })
+        setProject({ ...project, [e.target.name]: e.target.value });
     }
 
     function handleCategory(e) {
@@ -38,7 +39,7 @@ function ProjetoForm({ handleSubmit, btnText, projectData }) {
                 id: e.target.value,
                 name: e.target.options[e.target.selectedIndex].text,
             },
-        })
+        });
     }
 
     return (

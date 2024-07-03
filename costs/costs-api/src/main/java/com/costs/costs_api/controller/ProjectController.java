@@ -63,7 +63,7 @@ public class ProjectController {
         return projectService.create(project);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public Project update(@PathVariable UUID id, @RequestBody ProjectRequestDTO projectRequestDTO) {
 
         Project existingProject = projectService.getById(id);

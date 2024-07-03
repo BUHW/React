@@ -68,3 +68,59 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### anotações
+
+// const AppRouter = () => (
+//     <BrowserRouter>
+//         <AuthProvider>
+//             <Routes>
+//                 <Route path="/login" element={<Login />} />
+//                 <Route path="/" element={<App />} />
+//                 <Route path="/home" element={<Home />} />
+//                 <Route path="/projetos" element={<Projetos />} />
+//                 <Route path="/empresa" element={<Empresa />} />
+//                 <Route path="/contato" element={<Contato />} />
+//                 <Route path="/novosprojetos" element={<NovosProjetos />} />
+//                 <Route path="/projeto/:id" element={<Projeto />} />
+//             </Routes>
+//         </AuthProvider>
+//     </BrowserRouter>
+// );
+
+const AppRouter = createBrowserRouter([
+    {
+        path: '/login',
+        element: <Login />
+    },
+    {
+        path: '/',
+        element: <PrivateRoute><App /></PrivateRoute>,
+        children: [
+            {
+                path: '/home',
+                element: <Home />
+            },
+            {
+                path: '/projetos',
+                element: <Projetos />
+            },
+            {
+                path: '/empresa',
+                element: <Empresa />
+            },
+            {
+                path: '/contato',
+                element: <Contato />
+            },
+            {
+                path: '/novosprojetos',
+                element: <NovosProjetos />
+            },
+            {
+                path: '/projeto/:id',
+                element: <Projeto />
+            }
+        ]
+    }
+]);

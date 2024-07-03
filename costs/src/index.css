@@ -6,6 +6,11 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+:root {
+  --primary-color: #ffbb33;
+  --secundary-color: #222;
+}
+
 html, body, #root{
   background-color: #efefef;
   height: 100%;
