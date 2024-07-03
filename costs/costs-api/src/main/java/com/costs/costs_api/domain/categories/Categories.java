@@ -1,5 +1,7 @@
 package com.costs.costs_api.domain.categories;
 
+import com.costs.costs_api.domain.project.Project;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,4 +24,5 @@ public class Categories {
 
     @Column(nullable = false)
     private String name;
+
 }

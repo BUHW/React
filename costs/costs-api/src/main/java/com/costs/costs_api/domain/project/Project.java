@@ -2,6 +2,7 @@ package com.costs.costs_api.domain.project;
 
 import com.costs.costs_api.domain.services.Services;
 import com.costs.costs_api.domain.categories.Categories;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,14 +31,13 @@ public class Project {
     @Column(nullable = false)
     private Double budget;
 
-    @Column(nullable = false)
-    private Double cost = 0.0;
+    private Double cost;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private Categories categories;
+    private Categories category;
 
-    @OneToMany
-    @JoinColumn(name = "service_id")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Services> services;
 }

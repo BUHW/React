@@ -47,6 +47,7 @@ public class ServicesService implements ServicesServiceInterface {
 
         servicesUpdate.setName(services.getName());
         servicesUpdate.setCost(services.getCost());
+        servicesUpdate.setDescription(services.getDescription());
 
         return servicesRepository.save(servicesUpdate);
     }

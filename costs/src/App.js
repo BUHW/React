@@ -12,6 +12,7 @@ import Projeto from './components/pages/Projeto'
 import Container from './components/layout/Container'
 import Footer from './components/layout/Footer'
 import NavBar from './components/layout/NavBar'
+import Login from './components/pages/login/Login'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/contato" element={<Contato />} />
             <Route path="/NovosProjetos" element={<NovosProjetos />} />
             <Route path="/Projeto/:id" element={<Projeto />} />
+            <Route path='login' element={<Login />} />
 
           </Routes>
 

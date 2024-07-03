@@ -1,8 +1,10 @@
 
 import { useNavigate } from 'react-router-dom';
+import { HOST, PORT, HTTP, TOKEN } from '../../variables'
 
 import styles from './NovosProjetos.module.css';
 import ProjetoForm from '../project/ProjetoForm';
+import axios from 'axios';
 
 function NovosProjetos() {
 
@@ -13,18 +15,13 @@ function NovosProjetos() {
         project.cost = 0
         project.services = []
 
-        fetch('http://localhost:5000/projects', {
-            method: 'POST',
+        axios.post(`${HTTP}://${HOST}:${PORT}/projects`, project,{
             headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify(project),
+                'Authorization': `Bearer ${TOKEN}`,
+                'Content-Type': 'application/json' 
+            }
         })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data)
-                //redirecionar
-
+            .then(() => {
                 history('/Projetos', { state: { message: 'Projeto Criado com sucesso!' } });
             })
             .catch(err => console.log(err))

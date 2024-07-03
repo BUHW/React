@@ -39,7 +39,7 @@ public class CategoriesController {
         return categoriesService.update(id, categories);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable UUID id) {
         categoriesService.delete(id);
         return ResponseEntity.ok("Categoria excluida com sucesso!");

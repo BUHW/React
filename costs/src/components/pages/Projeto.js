@@ -1,7 +1,5 @@
-import { parse, v4 as uuidv4 } from 'uuid'
-
 import styles from './Projeto.module.css'
-
+import { v4 as uuidv4 } from 'uuid'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Loading from '../layout/Loading'
@@ -10,6 +8,8 @@ import ProjetoForm from '../project/ProjetoForm'
 import ServiceForm from '../service/ServiceForm'
 import Message from '../layout/Message'
 import ServiceCard from '../service/ServiceCard'
+import { HOST, PORT, HTTP, TOKEN } from '../../variables'
+import axios from 'axios'
 
 function Projeto() {
 
@@ -24,25 +24,18 @@ function Projeto() {
 
 
     useEffect(() => {
-
-        setTimeout(() => {
-
-            fetch(`http://localhost:5000/projects/${id}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(res => res.json())
-                .then((data) => {
-                    setProject(data)
-                    setServices(data.services)
-                })
-                .catch(err => console.log(err))
-
-        }, 400)
-
-    }, [id])
+        axios.get(`${HTTP}://${HOST}:${PORT}/projects/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${TOKEN}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((response) => {
+            setProject(response.data);
+            setServices(response.data.services);
+        })
+        .catch((err) => console.log(err));
+    }, [id]);
 
     function editPost(project) {
         setMessage('')
@@ -54,27 +47,23 @@ function Projeto() {
             return false
         }
 
-        fetch(`http://localhost:5000/projects/${project.id}`, {
-            method: 'PATCH',
+        axios.patch(`${HTTP}://${HOST}:${PORT}/projects/${project.id}`, project, {
             headers: {
+                'Authorization': `Bearer ${TOKEN}`,
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(project),
+            }
         })
-            .then((res) => res.json())
-            .then((data) => {
-
-                setProject(data)
-                setShowProjectForm(false)
-                setMessage('Projeto atualizado com sucesso')
-                setType('success')
-
-            })
-            .catch(err => console.log(err))
+        .then((response) => {
+            setProject(response.data);
+            setShowProjectForm(false);
+            setMessage('Projeto atualizado com sucesso');
+            setType('success');
+        })
+        .catch(err => console.log(err));
 
     }
 
-    function createService(project){
+    function createService(project) {
         setMessage('')
         // Ultimo serviço
         const lastService = project.services[project.services.length - 1]
@@ -87,7 +76,7 @@ function Projeto() {
 
         //valor maximo de validação
 
-        if(newCost > parseFloat(project.budget)){
+        if (newCost > parseFloat(project.budget)) {
             setMessage('Orçamento ultrapassado, verifique o valor do serviço')
             setType('error')
             project.services.pop()
@@ -100,26 +89,22 @@ function Projeto() {
 
         //atualização do projeto
 
-        fetch(`http://localhost:5000/projects/${project.id}`, {
-            method: 'PATCH',
+        axios.patch(`${HTTP}://${HOST}:${PORT}/projects/${project.id}`, project, {
             headers: {
+                'Authorization': `Bearer ${TOKEN}`,
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(project)
+            }
         })
-        .then(
-            (resp) => resp.json()
-        )
-        .then((data) => {
-            setShowServiceForm(false)
-        })
-        .catch(err => console.log(err))
+            .then(() => {
+                setShowServiceForm(false)
+            })
+            .catch(err => console.log(err))
     }
 
-    function removeService(id, cost){
+    function removeService(id, cost) {
 
         const servicesUpdated = project.services.filter(
-            (service) => service.id !== id 
+            (service) => service.id !== id
         )
 
         const projectUpdated = project
@@ -127,29 +112,27 @@ function Projeto() {
         projectUpdated.services = servicesUpdated
         projectUpdated.cost = parseFloat(projectUpdated.cost) - parseFloat(cost)
 
-        fetch(`http://localhost:5000/projects/${projectUpdated.id}`, {
-            method: 'PATCH',
+        axios.patch(`${HTTP}://${HOST}:${PORT}/projects/${project.id}`, project, {
             headers: {
+                'Authorization': `Bearer ${TOKEN}`,
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(projectUpdated)
+            }
         })
-        .then(
-            (resp) => resp.json()
-        )
-        .then((data) => {
-            setProject(projectUpdated)
-            setServices(servicesUpdated)
-            setMessage('Serviço removido com sucesso')
-            setType('success')
+        .then((response) => {
+            setShowServiceForm(false);
+            console.log(response.data);
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.error(err);
+            setMessage('Erro ao atualizar o projeto');
+            setType('error');
+        });
     }
 
     function toggleProjectForm() {
         setShowProjectForm(!showProjectForm)
     }
-    
+
     function toggleServiceForm() {
         setShowServiceForm(!showServiceForm)
     }
@@ -181,7 +164,7 @@ function Projeto() {
                             ) : (
                                 <section className={styles.project_info}>
                                     <ProjetoForm handleSubmit={editPost} btnText="Concluir edição"
-                                    projectData={project} />
+                                        projectData={project} />
                                 </section>
                             )}
                         </section>
@@ -191,7 +174,7 @@ function Projeto() {
                                 {!showServiceForm ? 'Adicionar serviço' : 'Fechar'}
                             </button>
                             <section className={styles.project_info}>
-                                {showServiceForm && (<ServiceForm 
+                                {showServiceForm && (<ServiceForm
                                     handleSubmit={createService}
                                     btnText="Adicionar serviço"
                                     projectData={project}
@@ -203,12 +186,12 @@ function Projeto() {
                             {services.length > 0 &&
                                 services.map((service) => (
                                     <ServiceCard
-                                    id = {service.id}
-                                    name = {service.name}
-                                    cost = {service.cost}
-                                    description = {service.description}
-                                    key = {service.key}
-                                    handleRemove = {removeService}
+                                        id={service.id}
+                                        name={service.name}
+                                        cost={service.cost}
+                                        description={service.description}
+                                        key={service.key}
+                                        handleRemove={removeService}
                                     />
                                 ))
                             }

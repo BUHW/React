@@ -6,10 +6,10 @@ import Container from "../layout/Container"
 import Loading from "../layout/Loading"
 import LinkButton from '../layout/LinkButton'
 import ProjectCard from "../project/ProjectCard"
+import { HOST, PORT, HTTP, TOKEN } from '../../variables'
+import axios from "axios"
 
 import styles from "./Projetos.module.css"
-
-
 
 function Projetos() {
 
@@ -24,34 +24,30 @@ function Projetos() {
     }
 
     useEffect(() => {
-
-        setTimeout(() => {
-            fetch('http://localhost:5000/projects', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'aplication/json'
-                }
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    setProjects(data)
-                    setRemoveLoading(true)
-                })
-                .catch((err) => console.log(err))
-        }, 500)
-
+        axios.get(`${HTTP}://${HOST}:${PORT}/projects`, {
+            headers: {
+                'Authorization': `Bearer ${TOKEN}`,
+                'Content-Type': 'application/json' 
+            }
+        })
+        .then(res => {
+            console.log(res.data)
+            setProjects(res.data)
+            setRemoveLoading(true)
+        })
+        .catch(err => console.log(err))
     }, [])
 
     function removeProject(id){
-        fetch(`http://localhost:5000/projects/${id}`, {
-            method: 'DELETE',
+        axios.delete(`${HTTP}://${HOST}:${PORT}/projects/${id}`, {
             headers: {
-                'Content-Type' : 'application/json'
+                'Authorization': `Bearer ${TOKEN}`,
+                'Content-Type': 'application/json' 
             }
         })
-        .then((res) => res.json())
         .then(() => {
             setProjects(projects.filter((project) => project.id !== id))
+
             // message
             setProjectsMessage('Projeto removido com sucesso!')
         })

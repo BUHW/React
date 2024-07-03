@@ -1,12 +1,17 @@
 package com.costs.costs_api.domain.services;
 
+import com.costs.costs_api.domain.project.Project;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collector;
 
 @Table(name = "services")
 @Entity
@@ -20,8 +25,15 @@ public class Services {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
+
     private Double cost;
+
+    private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    @JsonBackReference
+    private Project project;
+
 }

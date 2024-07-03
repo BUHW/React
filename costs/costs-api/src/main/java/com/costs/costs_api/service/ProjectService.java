@@ -1,6 +1,7 @@
 package com.costs.costs_api.service;
 
 import com.costs.costs_api.domain.project.Project;
+import com.costs.costs_api.domain.services.Services;
 import com.costs.costs_api.repositories.ProjectRepository;
 import com.costs.costs_api.service.interfaces.ProjectServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,29 +33,29 @@ public class ProjectService implements ProjectServiceInterface {
 
     @Override
     public Project create(Project project) {
-        try {
-            if (project.getCost() == null) {
-                project.setCost(0.0);
-            }
-            return projectRepository.save(project);
-        } catch(Exception e) {
-            throw new RuntimeException("Erro ao realizar a inserção de um projeto, motivo: " + e.getMessage());
-        }
+        project.getServices().forEach(service -> service.setProject(project));
+        return projectRepository.save(project);
     }
 
     @Override
-    public Project update(UUID id, Project project) {
-        Project projectUpdate = projectRepository.findById(id)
+    public Project update(UUID id, Project updatedProject) {
+        Project projectToUpdate = projectRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Project not found"));
 
-        projectUpdate.setName(project.getName());
-        projectUpdate.setBudget(project.getBudget());
-        projectUpdate.setCost(project.getCost());
-        projectUpdate.setCategories(project.getCategories());
-        projectUpdate.setServices(project.getServices());
+        projectToUpdate.setName(updatedProject.getName());
+        projectToUpdate.setBudget(updatedProject.getBudget());
+        projectToUpdate.setCost(updatedProject.getCost());
+        projectToUpdate.setCategory(updatedProject.getCategory());
+        List<Services> updatedServices = updatedProject.getServices();
+        if (updatedServices != null) {
+            projectToUpdate.getServices().clear();
+            updatedServices.forEach(service -> {
+                service.setProject(projectToUpdate);
+                projectToUpdate.getServices().add(service);
+            });
+        }
 
-
-        return projectRepository.save(projectUpdate);
+        return projectRepository.save(projectToUpdate);
     }
 
     @Override
