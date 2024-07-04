@@ -65,7 +65,6 @@ public class ProjectController {
 
     @PatchMapping("/{id}")
     public Project update(@PathVariable UUID id, @RequestBody ProjectRequestDTO projectRequestDTO) {
-
         Project existingProject = projectService.getById(id);
 
         existingProject.setName(projectRequestDTO.name());
@@ -83,10 +82,10 @@ public class ProjectController {
         } else {
             existingProject.setCategory(null);
         }
+
         List<Services> updatedServices = projectRequestDTO.services();
         if (updatedServices != null) {
             existingProject.getServices().clear();
-
             updatedServices.forEach(service -> {
                 service.setProject(existingProject);
                 existingProject.getServices().add(service);

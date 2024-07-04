@@ -1,6 +1,6 @@
 
 import { useNavigate } from 'react-router-dom';
-import { HOST, PORT, HTTP, TOKEN } from '../../variables'
+import { HOST, PORT, HTTP } from '../../variables'
 
 import styles from './NovosProjetos.module.css';
 import ProjetoForm from '../project/ProjetoForm';
@@ -15,12 +15,7 @@ function NovosProjetos() {
         project.cost = 0
         project.services = []
 
-        axios.post(`${HTTP}://${HOST}:${PORT}/projects`, project,{
-            headers: {
-                'Authorization': `Bearer ${TOKEN}`,
-                'Content-Type': 'application/json' 
-            }
-        })
+        axios.post(`${HTTP}://${HOST}:${PORT}/projects`, project)
             .then(() => {
                 history('/Projetos', { state: { message: 'Projeto Criado com sucesso!' } });
             })

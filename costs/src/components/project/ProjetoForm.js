@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { HOST, PORT, HTTP, TOKEN } from '../../variables';
+import { HOST, PORT, HTTP } from '../../variables';
 
 import styles from "./ProjetoForm.module.css";
 import Input from "../form/input";
@@ -12,12 +12,7 @@ function ProjetoForm({ handleSubmit, btnText, projectData }) {
     const [project, setProject] = useState(projectData || {});
 
     useEffect(() => {
-        axios.get(`${HTTP}://${HOST}:${PORT}/categories`, {
-            headers: {
-                'Authorization': `Bearer ${TOKEN}`,
-                'Content-Type': 'application/json' 
-            }
-        })
+        axios.get(`${HTTP}://${HOST}:${PORT}/categories`)
             .then((response) => {
                 setCategories(response.data);
             })

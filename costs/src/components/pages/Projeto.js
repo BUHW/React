@@ -8,7 +8,7 @@ import ProjetoForm from '../project/ProjetoForm'
 import ServiceForm from '../service/ServiceForm'
 import Message from '../layout/Message'
 import ServiceCard from '../service/ServiceCard'
-import { HOST, PORT, HTTP, TOKEN } from '../../variables'
+import { HOST, PORT, HTTP } from '../../variables'
 import axios from 'axios'
 
 function Projeto() {
@@ -24,17 +24,12 @@ function Projeto() {
 
 
     useEffect(() => {
-        axios.get(`${HTTP}://${HOST}:${PORT}/projects/${id}`, {
-            headers: {
-                'Authorization': `Bearer ${TOKEN}`,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((response) => {
-            setProject(response.data);
-            setServices(response.data.services);
-        })
-        .catch((err) => console.log(err));
+        axios.get(`${HTTP}://${HOST}:${PORT}/projects/${id}`)
+            .then((response) => {
+                setProject(response.data);
+                setServices(response.data.services);
+            })
+            .catch((err) => console.log(err));
     }, [id]);
 
     function editPost(project) {
@@ -47,19 +42,14 @@ function Projeto() {
             return false
         }
 
-        axios.patch(`${HTTP}://${HOST}:${PORT}/projects/${project.id}`, project, {
-            headers: {
-                'Authorization': `Bearer ${TOKEN}`,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((response) => {
-            setProject(response.data);
-            setShowProjectForm(false);
-            setMessage('Projeto atualizado com sucesso');
-            setType('success');
-        })
-        .catch(err => console.log(err));
+        axios.patch(`${HTTP}://${HOST}:${PORT}/projects/${project.id}`, project)
+            .then((response) => {
+                setProject(response.data);
+                setShowProjectForm(false);
+                setMessage('Projeto atualizado com sucesso');
+                setType('success');
+            })
+            .catch(err => console.log(err));
 
     }
 
@@ -89,14 +79,12 @@ function Projeto() {
 
         //atualização do projeto
 
-        axios.patch(`${HTTP}://${HOST}:${PORT}/projects/${project.id}`, project, {
-            headers: {
-                'Authorization': `Bearer ${TOKEN}`,
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(() => {
-                setShowServiceForm(false)
+        axios.patch(`${HTTP}://${HOST}:${PORT}/projects/${project.id}`, project)
+            .then((response) => {
+                setProject(response.data); 
+                setShowServiceForm(false);
+                setMessage('Serviço adicionado com sucesso');
+                setType('success');
             })
             .catch(err => console.log(err))
     }
@@ -112,21 +100,16 @@ function Projeto() {
         projectUpdated.services = servicesUpdated
         projectUpdated.cost = parseFloat(projectUpdated.cost) - parseFloat(cost)
 
-        axios.patch(`${HTTP}://${HOST}:${PORT}/projects/${project.id}`, project, {
-            headers: {
-                'Authorization': `Bearer ${TOKEN}`,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((response) => {
-            setShowServiceForm(false);
-            console.log(response.data);
-        })
-        .catch(err => {
-            console.error(err);
-            setMessage('Erro ao atualizar o projeto');
-            setType('error');
-        });
+        axios.patch(`${HTTP}://${HOST}:${PORT}/projects/${project.id}`, project)
+            .then((response) => {
+                setShowServiceForm(false);
+                console.log(response.data);
+            })
+            .catch(err => {
+                console.error(err);
+                setMessage('Erro ao atualizar o projeto');
+                setType('error');
+            });
     }
 
     function toggleProjectForm() {

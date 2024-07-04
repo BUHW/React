@@ -6,16 +6,20 @@ import SubmitButton from "../../form/SubmitButton"
 import styles from "./Login.module.css"
 import AuthContext from "../../auth/AuthContext"
 import { useNavigate } from "react-router-dom"
+import Message from "../../layout/Message"
 
 export default function Login() {
 
     const [auth, setAuth] = useState({ login: '', password: '' })
     const { login } = useContext(AuthContext)
+    const [message, setMessage] = useState()
+    const [type, setType] = useState()
 
     const navigate = useNavigate()
 
     async function handleLogin(e) {
         e.preventDefault();
+        setMessage('')
         try {
             const resp = await axios.post(`${HTTP}://${HOST}:${PORT}/auth/login`, auth)
 
@@ -31,11 +35,13 @@ export default function Login() {
                 login(token)
                 navigate('/')
             } else {
-                console.log('Erro ao fazer login')
+                console.log("error no login")
             }
 
         } catch (error) {
             console.log(error)
+            setMessage('Erro ao efetuar login, usuário ou senha inválidos');
+            setType('error');
         }
     }
 
@@ -50,6 +56,7 @@ export default function Login() {
 
     return (
         <section className={styles.container_login}>
+            {message && <Message type={type} msg={message} />}
             <form onSubmit={submit}>
                 <Input
                     type="text"

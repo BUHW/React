@@ -6,7 +6,7 @@ import Container from "../layout/Container"
 import Loading from "../layout/Loading"
 import LinkButton from '../layout/LinkButton'
 import ProjectCard from "../project/ProjectCard"
-import { HOST, PORT, HTTP, TOKEN } from '../../variables'
+import { HOST, PORT, HTTP } from '../../variables'
 import axios from "axios"
 
 import styles from "./Projetos.module.css"
@@ -24,12 +24,7 @@ function Projetos() {
     }
 
     useEffect(() => {
-        axios.get(`${HTTP}://${HOST}:${PORT}/projects`, {
-            headers: {
-                'Authorization': `Bearer ${TOKEN}`,
-                'Content-Type': 'application/json' 
-            }
-        })
+        axios.get(`${HTTP}://${HOST}:${PORT}/projects`)
         .then(res => {
             console.log(res.data)
             setProjects(res.data)
@@ -39,12 +34,7 @@ function Projetos() {
     }, [])
 
     function removeProject(id){
-        axios.delete(`${HTTP}://${HOST}:${PORT}/projects/${id}`, {
-            headers: {
-                'Authorization': `Bearer ${TOKEN}`,
-                'Content-Type': 'application/json' 
-            }
-        })
+        axios.delete(`${HTTP}://${HOST}:${PORT}/projects/${id}`)
         .then(() => {
             setProjects(projects.filter((project) => project.id !== id))
 
