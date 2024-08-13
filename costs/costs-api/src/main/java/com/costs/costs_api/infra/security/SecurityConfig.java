@@ -16,11 +16,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig {
 
+    // não utilizado
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
+    // Idealmente usar injecao de dependencia com construtor
     @Autowired
     SecurityFilter securityFilter;
+
+    // public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
+    //     this.customUserDetailsService = customUserDetailsService;
+    // }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

@@ -12,6 +12,7 @@ import java.util.UUID;
 @Table(name = "users")
 @Getter
 @Setter
+// Pelo que eu vi, vão não está utilizando o construtor com todos os argumentos. Poderia remover
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {

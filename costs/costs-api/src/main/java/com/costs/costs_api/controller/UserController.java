@@ -18,6 +18,8 @@ import java.util.UUID;
 @RequestMapping("/user")
 public class UserController {
 
+    // Como todas essas dependências têm interfaces, você poderia ter passado as interfaces no construtor,
+    //  e não as implementações. Isso facilita a troca de implementações e testes de unidade (Inversão de Controle)
     private final UserService userService;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -36,7 +38,9 @@ public class UserController {
     }
 
     @PostMapping("/register")
+    // O ideal é sempre o parametro do generic
     public ResponseEntity register(@RequestBody RegisterRequestDTO body) {
+        // está regra deveria estar dentro do service. O controller serve apenas para receber a requisição e enviar a resposta
         Optional<User> user = this.userRepository.findByLogin(body.login());
 
         if (user.isEmpty()){
@@ -54,6 +58,8 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    // Optional deveria ter sido tratado dentro do método getById do userService,
+    //  e não deveria ter sido passado para o controller
     public Optional<User> getById(@PathVariable UUID id) {
         return userService.getById(id);
     }
