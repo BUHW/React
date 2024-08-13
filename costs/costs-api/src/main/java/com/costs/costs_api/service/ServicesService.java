@@ -33,6 +33,8 @@ public class ServicesService implements ServicesServiceInterface {
 
     @Override
     public Services create(Services services) {
+        // Não acho esse tratamento de exceção necessário, pois o Spring já trata exceções de banco de dados
+        // Você poderia fazer um tratamento de exceção mais genérico dentro de uma classe ExceptionHandler
         try {
             return servicesRepository.save(services);
         } catch (Exception e) {

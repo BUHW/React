@@ -18,6 +18,7 @@ import java.util.stream.Collector;
 @Setter
 @Getter
 @NoArgsConstructor
+// Pelo que eu vi, vão não está utilizando o construtor com todos os argumentos. Poderia remover
 @AllArgsConstructor
 public class Services {
 

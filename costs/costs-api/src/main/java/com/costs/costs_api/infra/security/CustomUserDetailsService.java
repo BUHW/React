@@ -13,8 +13,13 @@ import java.util.ArrayList;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+    // Usar injecao com construtor
     @Autowired
     private UserRepository repository;
+
+    // public CustomUserDetailsService(UserRepository repository) {
+    //     this.repository = repository;
+    // }
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {

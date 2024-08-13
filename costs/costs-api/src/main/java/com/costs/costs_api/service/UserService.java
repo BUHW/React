@@ -33,8 +33,11 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
+    // public User getById(UUID id) {
     public Optional<User> getById(UUID id) {
+        // O Optional deveria estar sendo tratado dentro do Service, e não no Controller
         return userRepository.findById(id);
+        // return userRepositoy.findById(id).orElseThrow(() -> new UserNotFoundException());
     }
 
     @Override

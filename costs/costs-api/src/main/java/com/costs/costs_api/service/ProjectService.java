@@ -28,6 +28,8 @@ public class ProjectService implements ProjectServiceInterface {
     @Override
     public Project getById(UUID id) {
         return projectRepository.findById(id)
+                // O ideal seria lançar uma exceção mais específica, como ProjectNotFoundException,
+                // que estenderia de RuntimeException
                 .orElseThrow(() -> new RuntimeException("Project not found"));
     }
 
@@ -40,6 +42,8 @@ public class ProjectService implements ProjectServiceInterface {
     @Override
     public Project update(UUID id, Project updatedProject) {
         Project projectToUpdate = projectRepository.findById(id)
+                // O ideal seria lançar uma exceção mais específica, como ProjectNotFoundException,
+                // que estenderia de RuntimeException
                 .orElseThrow(() -> new RuntimeException("Project not found"));
 
         projectToUpdate.setName(updatedProject.getName());

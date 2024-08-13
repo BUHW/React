@@ -18,7 +18,10 @@ import java.util.UUID;
 //@CrossOrigin(origins = "http://localhost:3000")
 public class ProjectController {
 
+    // Como todas essas dependências têm interfaces, você poderia ter passado as interfaces no construtor,
+    //  e não as implementações. Isso facilita a troca de implementações e testes de unidade (Inversão de Controle)
     private final ProjectService projectService;
+    // O repository deveria ser acessado apenas pelo service
     private final CategoriesRepository categoriesRepository;
 
     @Autowired
@@ -38,7 +41,9 @@ public class ProjectController {
     }
 
     @PostMapping
+    // O ideal é sempre devolver um DTO ao invés da entidade diretamente
     public Project create(@RequestBody ProjectRequestDTO projectRequestDTO) {
+        // regra deveria ficar dentro do ProjectService. O controller serve apenas para receber requisição e enviar resposta
         Project project = new Project();
         project.setName(projectRequestDTO.name());
         project.setBudget(projectRequestDTO.budget());
@@ -64,7 +69,9 @@ public class ProjectController {
     }
 
     @PatchMapping("/{id}")
+    // O ideal é sempre devolver um DTO ao invés da entidade diretamente
     public Project update(@PathVariable UUID id, @RequestBody ProjectRequestDTO projectRequestDTO) {
+        // regra deveria ficar dentro do ProjectService. O controller serve apenas para receber requisição e enviar resposta
         Project existingProject = projectService.getById(id);
 
         existingProject.setName(projectRequestDTO.name());
